@@ -17,10 +17,8 @@ app.use("/", registerRouter);
 app.use("/", driveRouter);
 
 (async () => {
-  // register `.jsx` or `.tsx` as a view template engine
-  await register(app);
- app.post("/register", function(req, res) {
-     res.send(req.body)
- })
-  app.listen(3001);
+  
+    await register(app);
+    app.listen(3001);
+
 })();
