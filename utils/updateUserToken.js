@@ -8,6 +8,6 @@ export default async function updateUserToken(user, newtoken, password) {
     const db = client.use("users")
     const doc = await db.get(user)
 
-    const res = await db.insert({ _id: user, _rev: doc._rev, user: user, token: newtoken, password: password })
+    const res = await db.insert({ _id: user, _rev: doc._rev, user: user, token: newtoken })
     return res.ok
 }

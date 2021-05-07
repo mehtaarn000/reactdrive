@@ -1,14 +1,15 @@
-export default function MyDrive() {
-    return <FileForm></FileForm>
+export default function MyDrive(props) {
+    return <FileForm error={props.error}></FileForm>
 }
 
 class FileForm extends React.Component {
     render() {
         return (
             <div>
-                <div></div>
-                <form action="/upload" method="post" encType="multipart/form-data"> 
+                <div>{this.props.error}</div>
+                <form action="/drive" method="post" encType="multipart/form-data"> 
                     <input type="file" multiple name="uploadfiles"></input>
+                    <input type="submit"></input>
                 </form>
             </div>
         )
