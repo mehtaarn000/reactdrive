@@ -4,6 +4,7 @@ import isAuth from "../utils/isAuth.js"
 import uploadDocument from "../utils/uploadDocument.js"
 import getUserByToken from "../utils/getUserByToken.js"
 import getUserDocuments from "../utils/getUserDocuments.js"
+import getSingleDocument from "../utils/getSingleDocument.js"
 
 let driveRouter = express.Router()
 export default driveRouter;
@@ -18,6 +19,20 @@ driveRouter.get("/drive", async function(req, res) {
     const documents = await getUserDocuments(user)
     
     res.render("drive", {documents: documents})
+})
+
+driveRouter.get("/drive/:docName", async function(req, res) {
+
+    const checkAuth = await isAuth(req.cookies)
+    if (!checkAuth) {
+        res.redirect("/register")
+    }  
+
+    const docName = req.params.docName
+    const user = await getUserByToken(req.cookies.token)
+
+    const data = await getSingleDocument(user, docName)  
+    res.send(`<pre>${data}</pre>`)
 })
 
 driveRouter.post("/drive", async function(req, res) {
