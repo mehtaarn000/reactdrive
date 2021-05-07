@@ -44,7 +44,7 @@ loginRouter.post("/login", async (req, res) => {
     if (cmp) {
         const newtoken = generateRandom()
         const update = await updateUserToken(username, newtoken, serverRes.password.toString())
-        console.log(update)
+
         if (!update) {
             res.status(404).render("login", {error: "Server error", register: 0})
             return
