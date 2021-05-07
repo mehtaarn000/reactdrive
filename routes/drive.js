@@ -3,6 +3,7 @@ import express from "express"
 import isAuth from "../utils/isAuth.js"
 import uploadDocument from "../utils/uploadDocument.js"
 import getUserByToken from "../utils/getUserByToken.js"
+import getUserDocuments from "../utils/getUserDocuments.js"
 
 let driveRouter = express.Router()
 export default driveRouter;
@@ -13,7 +14,10 @@ driveRouter.get("/drive", async function(req, res) {
         res.redirect("/register")
     }  
 
-    res.render("drive")
+    const user = await getUserByToken(req.cookies.token)
+    const documents = await getUserDocuments(user)
+    
+    res.render("drive", {documents: documents})
 })
 
 driveRouter.post("/drive", async function(req, res) {
