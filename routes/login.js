@@ -33,7 +33,7 @@ loginRouter.post("/login", async (req, res) => {
     }
 
     const serverRes = await getUser(username.toString())
-    console.log(serverRes)
+
     if (!serverRes) {
         res.render("login", {error: "User not found", register: 0})
         return
