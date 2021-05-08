@@ -10,6 +10,3 @@ export default async function getSingleDocument(user, docName) {
     const data = await db.attachment.get(user, docName)
     return data.toString()
 }
-
-//const a =await  getSingleDocument("arnav", "ssc-hashobject.sh")
-//console.log(a)

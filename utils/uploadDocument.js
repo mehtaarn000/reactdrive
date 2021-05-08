@@ -24,4 +24,6 @@ export default async function uploadDocument(user, name, data, mime) {      // u
         rev = response.rev
         index++
     }
+
+    return true
 }

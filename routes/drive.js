@@ -64,7 +64,13 @@ driveRouter.post("/drive", async function(req, res) {
     }
 
     const user = await getUserByToken(req.cookies.token)
-    uploadDocument(user, nameArr, dataArr, mimeArr)
+    const getDoc = await uploadDocument(user, nameArr, dataArr, mimeArr)
 
-    res.render("drive")
+    // Code should never get to this point
+    if (!getDoc) { 
+        res.render("drive", {documents: documents, error: "An error occured!"})
+    }
+
+    const documents = await getUserDocuments(user)
+    res.render("drive", {documents: documents})
 })
